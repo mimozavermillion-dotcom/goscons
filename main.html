@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор госпрограмм — SMART + РС(Я)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="game-container">
+    <h1>📋 Конструктор госпрограмм <span style="font-size: 20px;">| SMART + РС(Я)</span></h1>
+    <div class="sub">✓ Целеполагание → Определение типа → Сборка структуры → Экспертиза</div>
+
+    <!-- Плашечка -->
+    <div class="doc-plate">
+        <strong>📌 Данные Республики Саха (Якутия):</strong><br>
+        <span class="level">26 госпрограмм</span> &nbsp;|&nbsp;
+        <span class="level">9 стратегических указов</span> &nbsp;|&nbsp;
+        <span class="level">4 типа структурных элементов</span> &nbsp;|&nbsp;
+        <span class="level">26 ответственных исполнителей</span>
+    </div>
+
+    <!-- SMART -->
+    <div id="smartBlock" class="smart-panel">
+        <div class="smart-title">🎯 1. Сформулируйте цель структурного элемента (SMART)</div>
+        <div class="smart-grid">
+            <div class="smart-item">
+                <label>S (конкретность) <span id="iconS"></span></label>
+                <select id="specific">
+                    <option value="">--выберите--</option>
+                    <option value="повышение">повышение</option>
+                    <option value="обеспечение">обеспечение</option>
+                    <option value="снижение">снижение</option>
+                    <option value="разработка">разработка</option>
+                </select>
+            </div>
+            <div class="smart-item">
+                <label>M (измеримость) <span id="iconM"></span></label>
+                <input type="number" id="measurable" placeholder="Числовое значение" style="margin-bottom:4px;">
+                <select id="okeiSelect">
+                    <option value="">-- ОКЕИ --</option>
+                    <option value="796">796 — штука (ед.)</option>
+                    <option value="112">112 — тыс. кв. м</option>
+                    <option value="384">384 — тыс. руб.</option>
+                    <option value="468">468 — тыс. человек</option>
+                    <option value="744">744 — процент</option>
+                    <option value="430">430 — млн руб.</option>
+                    <option value="008">008 — гектар</option>
+                    <option value="114">114 — тыс. куб. м</option>
+                    <option value="511">511 — килограмм</option>
+                    <option value="356">356 — час</option>
+                    <option value="да/нет">да/нет</option>
+                </select>
+            </div>
+            <div class="smart-item">
+                <label>A (достижимость млн ₽) <span id="iconA"></span></label>
+                <input type="number" id="budget" placeholder="бюджет, млн" value="180">
+            </div>
+            <div class="smart-item">
+                <label>R (госпрограмма) <span id="iconR"></span></label>
+                <select id="programSelect">
+                    <option value="">--выберите--</option>
+                </select>
+            </div>
+            <div class="smart-item">
+                <label>R (стратегический указ) <span id="iconDecree"></span></label>
+                <select id="decreeSelect">
+                    <option value="">--выберите--</option>
+                    <option value="нет">нет связи</option>
+                </select>
+            </div>
+            <div class="smart-item">
+    <label>R (уровень проекта) <span id="iconFederal"></span></label>
+    <select id="federalLevel">
+        <option value="">--выберите--</option>
+        <option value="Национальный проект">Национальный проект</option>
+        <option value="Федеральный проект (не входит в нацпроект)">Федеральный проект (не входит в нацпроект)</option>
+    </select>
+</div>
+            <div class="smart-item">
+                <label>T (срок, год)<span id="iconT"></span></label>
+                <select id="timebound">
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2030">2030</option>
+                </select>
+            </div>
+        </div>
+        <div class="smart-status">
+            <span>📌 Заполните все поля. R — выберите программу и указ.</span>
+            <button id="checkSmartBtn" class="btn">✅ Проверить SMART-цель</button>
+        </div>
+        <div id="smartMessage" style="margin-top: 12px; font-weight: 500;"></div>
+    </div>
+
+    <div id="gameBlock" style="display:none;">
+        
+        <!-- Шаг 2 -->
+        <div id="stepType" class="game-step">
+    <div class="step-title">📌 Шаг 2: Определите тип структурного элемента</div>
+    
+    <div id="elementDisplay" class="element-card">
+        <strong>Структурный элемент:<span id="iconSE"></span></strong>
+        <span id="elementName">—</span>
+        <div style="margin-top:10px; font-weight:400; font-size:14px; color:#4a6a7a; line-height:1.6;">
+            📁 Программа: <span id="elementProgram">—</span><br>
+            📜 Указ: <span id="elementDecree">—</span><br>
+            🏛️ Исполнитель: <span id="elementExecutor">—</span>
+        </div>
+    </div>
+
+    <div class="type-options">
+        <button class="type-btn" data-type="Региональный проект">
+            <span class="icon">📘</span>
+            <span class="info">
+                <span class="title">Региональный проект</span>
+                <span class="desc">Проект, реализуемый на уровне региона</span>
+            </span>
+        </button>
+        <button class="type-btn" data-type="Ведомственный проект">
+            <span class="icon">📗</span>
+            <span class="info">
+                <span class="title">Ведомственный проект</span>
+                <span class="desc">Проект в рамках одного ведомства</span>
+            </span>
+        </button>
+        <button class="type-btn" data-type="Иной региональный проект">
+            <span class="icon">📙</span>
+            <span class="info">
+                <span class="title">Иной региональный проект</span>
+                <span class="desc">Региональный проект особого типа</span>
+            </span>
+        </button>
+        <button class="type-btn" data-type="Комплекс процессных мероприятий">
+            <span class="icon">📕</span>
+            <span class="info">
+                <span class="title">Комплекс процессных мероприятий</span>
+                <span class="desc">Система регулярных мероприятий</span>
+            </span>
+        </button>
+    </div>
+
+    <div id="typeFeedback" class="feedback-message"></div>
+    <button id="nextToConstructBtn" class="btn btn-green" style="display:none; margin-top:20px; padding:14px 40px; font-size:17px;">
+        ➡️ Перейти к сборке
+    </button>
+</div>
+
+        <!-- Шаг 3: Конструктор -->
+        <div id="stepConstruct" class="game-step" style="display:none;">
+            <div class="step-title">📌 Шаг 3: Соберите структуру элемента</div>
+            <details class="passport-block" open>
+        <summary>📄 Паспорт элемента: <span id="passportName"></span></summary>
+        <table class="passport-table">
+            <tr><td>Программа</td><td id="passportProgram"></td></tr>
+            <tr><td>Стратегический указ</td><td id="passportDecree"></td></tr>
+            <tr><td>Уровень проекта</td><td id="passportFederal"></td></tr>
+            <tr><td>Тип элемента</td><td id="passportType"></td></tr>
+            <tr><td>Ответственный исполнитель</td><td id="passportExecutor"></td></tr>
+        </table>
+        <p class="passport-hint">💡 Ниже — задачи, показатели и мероприятия из этого паспорта. Соберите их в слоты.</p>
+    </details>
+            <div style="margin-bottom:16px; color:#4a6a7a; font-size:14px;">
+                🎯 <strong>Цель (SMART):</strong> <span id="displayGoalText">—</span>
+                &nbsp;|&nbsp; ОКЕИ: <span id="displayGoalOkei">—</span>
+            </div>
+            
+            <div class="split-layout">
+                <div class="cards-deck">
+                    <h4>📇 Колода карточек</h4>
+                    <div style="font-size:12px; color:#4a6a7a; margin-bottom:8px;">
+                        🏷️ Выберите правильные задачи, показатели и мероприятия для вашего элемента.
+                    </div>
+                    <div class="card-list" id="cardsContainer"></div>
+                </div>
+                <div class="schema">
+                    <h4>🏗️ Сборка</h4>
+                    <div class="slot-group">
+                        <div class="slot-label">📋 Задачи</div>
+                        <div id="slotTasks" class="slot" data-slot-type="task">[перетащите сюда задачи]</div>
+                    </div>
+                    <div class="slot-group">
+                        <div class="slot-label">📊 Показатели</div>
+                        <div id="slotIndicators" class="slot" data-slot-type="indicator">[перетащите сюда показатели]</div>
+                    </div>
+                    <div class="slot-group">
+                        <div class="slot-label">⚙️ Мероприятия</div>
+                        <div id="slotMeasures" class="slot" data-slot-type="measure">[перетащите сюда мероприятия]</div>
+                    </div>
+                </div>
+            </div>
+            <div class="result-area">
+                <div id="constructFeedback" class="feedback">💡 Перетащите карточки в соответствующие слоты.</div>
+                <button id="finalExamineBtn" class="btn btn-green">🔍 Финальная экспертиза</button>
+                <button id="resetConstructBtn" class="btn btn-grey">⟳ Сбросить</button>
+            </div>
+        </div>
+
+        <div id="resultScreen" class="game-step" style="display:none;">
+            <div class="step-title">🏆 Результаты</div>
+            <div id="resultContent"></div>
+            <button id="restartBtn" class="btn">🔄 Пройти заново</button>
+        </div>
+    </div>
+
+    <footer>Игровой тренажёр — SMART + структура госпрограмм РС(Я)</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
